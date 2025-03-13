@@ -6,8 +6,20 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+} from "@/components/ui/dialog";
 
-const LoginDialog = () => {
+interface LoginDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const LoginDialog = ({ isOpen, onClose }: LoginDialogProps) => {
   const [activeTab, setActiveTab] = useState('admin');
   const { toast } = useToast();
   
@@ -18,28 +30,19 @@ const LoginDialog = () => {
       title: `${role} login attempted`,
       description: "This is a demonstration. Authentication would happen here in a real application.",
     });
-  };
-
-  const closeDialog = () => {
-    const dialog = document.getElementById('login-dialog') as HTMLDialogElement | null;
-    if (dialog) {
-      dialog.close();
-    }
+    onClose();
   };
 
   return (
-    <dialog id="login-dialog" className="fixed inset-0 bg-black/25 backdrop-blur-sm w-full h-full flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative mx-4">
-        <button
-          onClick={closeDialog}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-          aria-label="Close"
-        >
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold">Login</DialogTitle>
+        </DialogHeader>
+        <DialogClose className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
           <X className="h-5 w-5" />
-        </button>
-
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-
+        </DialogClose>
+        
         <Tabs defaultValue="admin" value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-3 mb-6">
             <TabsTrigger value="admin">Admin</TabsTrigger>
@@ -99,8 +102,8 @@ const LoginDialog = () => {
         <div className="mt-4 text-center text-sm text-gray-500">
           <a href="#" className="hover:underline">Forgot password?</a>
         </div>
-      </div>
-    </dialog>
+      </DialogContent>
+    </Dialog>
   );
 };
 
