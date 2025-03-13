@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, LogIn } from 'lucide-react';
@@ -34,6 +33,30 @@ const NavItem = ({
       {active && (
         <span className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-primary" />
       )}
+    </Link>
+  );
+};
+
+const DropdownMenuItem = ({ 
+  to, 
+  children, 
+  index, 
+  onClick 
+}: { 
+  to: string; 
+  children: React.ReactNode; 
+  index: number; 
+  onClick?: () => void;
+}) => {
+  return (
+    <Link 
+      to={to} 
+      className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary animate-fade-in`}
+      style={{ animationDelay: `${100 + (index * 75)}ms` }}
+      role="menuitem"
+      onClick={onClick}
+    >
+      {children}
     </Link>
   );
 };
@@ -99,7 +122,6 @@ const Navbar = () => {
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
             <nav className="hidden md:flex md:items-center md:space-x-4 animate-fade-in">
               <NavItem href="/" active={isActive("/")}>Home</NavItem>
               
@@ -117,11 +139,11 @@ const Navbar = () => {
                     <span className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-primary" />
                   )}
                 </button>
-                <div className="absolute left-0 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute left-0 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden">
                   <div className="py-1" role="menu" aria-orientation="vertical">
-                    <Link to="/about" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary" role="menuitem">About Us</Link>
-                    <Link to="/mission" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary" role="menuitem">Mission</Link>
-                    <Link to="/vision" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary" role="menuitem">Vision</Link>
+                    <DropdownMenuItem to="/about" index={0} onClick={closeMenu}>About Us</DropdownMenuItem>
+                    <DropdownMenuItem to="/mission" index={1} onClick={closeMenu}>Mission</DropdownMenuItem>
+                    <DropdownMenuItem to="/vision" index={2} onClick={closeMenu}>Vision</DropdownMenuItem>
                   </div>
                 </div>
               </div>
@@ -140,10 +162,10 @@ const Navbar = () => {
                     <span className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-primary" />
                   )}
                 </button>
-                <div className="absolute left-0 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute left-0 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden">
                   <div className="py-1" role="menu" aria-orientation="vertical">
-                    <Link to="/images" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary" role="menuitem">Images</Link>
-                    <Link to="/videos" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary" role="menuitem">Videos</Link>
+                    <DropdownMenuItem to="/images" index={0} onClick={closeMenu}>Images</DropdownMenuItem>
+                    <DropdownMenuItem to="/videos" index={1} onClick={closeMenu}>Videos</DropdownMenuItem>
                   </div>
                 </div>
               </div>
@@ -161,7 +183,6 @@ const Navbar = () => {
               </Button>
             </nav>
 
-            {/* Mobile Menu Button */}
             <div className="md:hidden">
               <button onClick={handleMobileMenuToggle} className="p-2">
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -170,7 +191,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden bg-white animate-fade-in border-b border-gray-200">
             <div className="space-y-1 px-4 py-3">
@@ -191,28 +211,10 @@ const Navbar = () => {
                   <ChevronDown className={`h-4 w-4 transition-transform ${activeDropdown === 'about' ? 'rotate-180' : ''}`} />
                 </button>
                 {activeDropdown === 'about' && (
-                  <div className="pl-4 space-y-1 pt-1 pb-2">
-                    <Link 
-                      to="/about" 
-                      className="block py-1.5 text-sm hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2" 
-                      onClick={closeMenu}
-                    >
-                      About Us
-                    </Link>
-                    <Link 
-                      to="/mission" 
-                      className="block py-1.5 text-sm hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2" 
-                      onClick={closeMenu}
-                    >
-                      Mission
-                    </Link>
-                    <Link 
-                      to="/vision" 
-                      className="block py-1.5 text-sm hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2" 
-                      onClick={closeMenu}
-                    >
-                      Vision
-                    </Link>
+                  <div className="pl-4 space-y-1 pt-1 pb-2 overflow-hidden">
+                    <DropdownMenuItem to="/about" index={0} onClick={closeMenu}>About Us</DropdownMenuItem>
+                    <DropdownMenuItem to="/mission" index={1} onClick={closeMenu}>Mission</DropdownMenuItem>
+                    <DropdownMenuItem to="/vision" index={2} onClick={closeMenu}>Vision</DropdownMenuItem>
                   </div>
                 )}
               </div>
@@ -226,21 +228,9 @@ const Navbar = () => {
                   <ChevronDown className={`h-4 w-4 transition-transform ${activeDropdown === 'gallery' ? 'rotate-180' : ''}`} />
                 </button>
                 {activeDropdown === 'gallery' && (
-                  <div className="pl-4 space-y-1 pt-1 pb-2">
-                    <Link 
-                      to="/images" 
-                      className="block py-1.5 text-sm hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2" 
-                      onClick={closeMenu}
-                    >
-                      Images
-                    </Link>
-                    <Link 
-                      to="/videos" 
-                      className="block py-1.5 text-sm hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2" 
-                      onClick={closeMenu}
-                    >
-                      Videos
-                    </Link>
+                  <div className="pl-4 space-y-1 pt-1 pb-2 overflow-hidden">
+                    <DropdownMenuItem to="/images" index={0} onClick={closeMenu}>Images</DropdownMenuItem>
+                    <DropdownMenuItem to="/videos" index={1} onClick={closeMenu}>Videos</DropdownMenuItem>
                   </div>
                 )}
               </div>
