@@ -24,7 +24,7 @@ const NavItem = ({
     <Link 
       to={href} 
       className={cn(
-        "relative px-3 py-2 font-medium transition-colors hover:text-primary flex items-center gap-1",
+        "relative px-3 py-2 font-medium transition-colors hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md flex items-center gap-1",
         active ? "text-primary" : "text-foreground"
       )}
       onClick={onClick}
@@ -106,7 +106,7 @@ const Navbar = () => {
               <div className="relative group">
                 <button 
                   className={cn(
-                    "px-3 py-2 font-medium transition-colors hover:text-primary flex items-center gap-1",
+                    "px-3 py-2 font-medium transition-colors hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md flex items-center gap-1",
                     (isActive("/about") || isActive("/mission") || isActive("/vision")) ? "text-primary" : "text-foreground"
                   )}
                   onClick={() => toggleDropdown('about')}
@@ -119,9 +119,9 @@ const Navbar = () => {
                 </button>
                 <div className="absolute left-0 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="py-1" role="menu" aria-orientation="vertical">
-                    <Link to="/about" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">About Us</Link>
-                    <Link to="/mission" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Mission</Link>
-                    <Link to="/vision" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Vision</Link>
+                    <Link to="/about" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary" role="menuitem">About Us</Link>
+                    <Link to="/mission" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary" role="menuitem">Mission</Link>
+                    <Link to="/vision" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary" role="menuitem">Vision</Link>
                   </div>
                 </div>
               </div>
@@ -129,7 +129,7 @@ const Navbar = () => {
               <div className="relative group">
                 <button 
                   className={cn(
-                    "px-3 py-2 font-medium transition-colors hover:text-primary flex items-center gap-1",
+                    "px-3 py-2 font-medium transition-colors hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md flex items-center gap-1",
                     (isActive("/gallery") || isActive("/images") || isActive("/videos")) ? "text-primary" : "text-foreground"
                   )}
                   onClick={() => toggleDropdown('gallery')}
@@ -142,8 +142,8 @@ const Navbar = () => {
                 </button>
                 <div className="absolute left-0 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="py-1" role="menu" aria-orientation="vertical">
-                    <Link to="/images" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Images</Link>
-                    <Link to="/videos" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Videos</Link>
+                    <Link to="/images" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary" role="menuitem">Images</Link>
+                    <Link to="/videos" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary" role="menuitem">Videos</Link>
                   </div>
                 </div>
               </div>
@@ -176,7 +176,7 @@ const Navbar = () => {
             <div className="space-y-1 px-4 py-3">
               <Link 
                 to="/" 
-                className="block py-2 font-medium"
+                className="block py-2 font-medium hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2"
                 onClick={closeMenu}
               >
                 Home
@@ -185,7 +185,7 @@ const Navbar = () => {
               <div>
                 <button 
                   onClick={() => toggleDropdown('about')}
-                  className="flex w-full items-center justify-between py-2 font-medium"
+                  className="flex w-full items-center justify-between py-2 font-medium hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2"
                 >
                   About
                   <ChevronDown className={`h-4 w-4 transition-transform ${activeDropdown === 'about' ? 'rotate-180' : ''}`} />
@@ -194,21 +194,21 @@ const Navbar = () => {
                   <div className="pl-4 space-y-1 pt-1 pb-2">
                     <Link 
                       to="/about" 
-                      className="block py-1.5 text-sm" 
+                      className="block py-1.5 text-sm hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2" 
                       onClick={closeMenu}
                     >
                       About Us
                     </Link>
                     <Link 
                       to="/mission" 
-                      className="block py-1.5 text-sm" 
+                      className="block py-1.5 text-sm hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2" 
                       onClick={closeMenu}
                     >
                       Mission
                     </Link>
                     <Link 
                       to="/vision" 
-                      className="block py-1.5 text-sm" 
+                      className="block py-1.5 text-sm hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2" 
                       onClick={closeMenu}
                     >
                       Vision
@@ -220,7 +220,7 @@ const Navbar = () => {
               <div>
                 <button 
                   onClick={() => toggleDropdown('gallery')}
-                  className="flex w-full items-center justify-between py-2 font-medium"
+                  className="flex w-full items-center justify-between py-2 font-medium hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2"
                 >
                   Gallery
                   <ChevronDown className={`h-4 w-4 transition-transform ${activeDropdown === 'gallery' ? 'rotate-180' : ''}`} />
@@ -229,14 +229,14 @@ const Navbar = () => {
                   <div className="pl-4 space-y-1 pt-1 pb-2">
                     <Link 
                       to="/images" 
-                      className="block py-1.5 text-sm" 
+                      className="block py-1.5 text-sm hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2" 
                       onClick={closeMenu}
                     >
                       Images
                     </Link>
                     <Link 
                       to="/videos" 
-                      className="block py-1.5 text-sm" 
+                      className="block py-1.5 text-sm hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2" 
                       onClick={closeMenu}
                     >
                       Videos
@@ -247,7 +247,7 @@ const Navbar = () => {
               
               <Link 
                 to="/contact" 
-                className="block py-2 font-medium"
+                className="block py-2 font-medium hover:text-primary hover:bg-accent hover:bg-opacity-80 rounded-md px-2"
                 onClick={closeMenu}
               >
                 Contact Us
